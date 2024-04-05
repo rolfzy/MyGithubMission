@@ -4,11 +4,7 @@ import com.data.response.DetailResponse
 import com.data.response.GithubResponse
 import com.data.response.ItemsItem
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -34,12 +30,5 @@ interface ApiService {
         @Path("username")username: String
     ):Call<List<ItemsItem>>
 
-//    @FormUrlEncoded
-//    @Headers("Authorization: token 12345")
-//    @POST("review")
-//    fun postreview(
-//        @Field("id") id:String,
-//        @Field("name") name:String,
-//        @Field("review") review:String
-//    ): Call<PostReviewResponse>
+
 }

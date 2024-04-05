@@ -11,10 +11,10 @@ class CallBackMain (
     override fun getNewListSize(): Int = listnew.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return listold[oldItemPosition].id == listnew[newItemPosition].id
+        return listold[oldItemPosition] == listnew[newItemPosition]
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return listold[oldItemPosition].id == listnew[newItemPosition].id
+        return listold[oldItemPosition] == listnew[newItemPosition]
     }
 }

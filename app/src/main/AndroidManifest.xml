@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGithubMission"
         tools:targetApi="31">
-        <activity android:name="ui.DetailUserActivity"/>
+        <activity
+            android:name="ui.FavoriteActivity"
+            android:exported="false" />
+        <activity android:name="ui.DetailUserActivity" />
         <activity
             android:name="ui.DetailUserViewModel"
             android:exported="false"

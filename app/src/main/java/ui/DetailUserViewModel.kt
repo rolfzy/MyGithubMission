@@ -5,17 +5,21 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.data.database.EntityGithub
+import com.data.database.GithubRepository
 
 import com.data.response.DetailResponse
 import com.data.response.ItemsItem
 
 import data.retrofit.ApiConfig
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class DetailUserViewModel : ViewModel() {
+class DetailUserViewModel(private val githubRepository: GithubRepository) : ViewModel() {
     private val _UserDetail = MutableLiveData<DetailResponse>()
     val UserDetail: LiveData<DetailResponse> = _UserDetail
 
@@ -28,9 +32,10 @@ class DetailUserViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    companion object {
-        private const val TAG = "DetailUserViewModel"
-    }
+    private val _userFavorite = MutableLiveData<Boolean>()
+    val UserFavorite: LiveData<Boolean> = _userFavorite
+
+
 
 
     fun detailUser(username: String ) {
@@ -79,7 +84,7 @@ class DetailUserViewModel : ViewModel() {
         })
     }
 
-    fun FollowingData(username: String=""){
+    fun FollowingData(username: String="") {
         _isLoading.value = true
         val client = ApiConfig.getApiService().Getdatafollowing(username)
         client.enqueue(object : Callback<List<ItemsItem>> {
@@ -89,7 +94,7 @@ class DetailUserViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    _Following.value =response.body()
+                    _Following.value = response.body()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
@@ -100,6 +105,30 @@ class DetailUserViewModel : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+
+    }
+    fun FavoriteByName(username: String): LiveData<EntityGithub> {
+        return githubRepository.getFavoriteByUsername(username)
+    }
+
+    fun InsertFavUser(entityGithub: EntityGithub) {
+        viewModelScope.launch {
+            githubRepository.insertFavorite(entityGithub)
+        }
+
+    }
+
+    fun DeleteFavUser(entityGithub: EntityGithub) {
+        viewModelScope.launch {
+            githubRepository.deleteFavorite(entityGithub)
+        }
+
+    }
+    companion object {
+        private const val TAG = "DetailUserViewModel"
+        const val KEY_USER = "key_user"
+        const val KEY_USERNAME = " "
+        const val KEY_AVATAR = "key_avatar"
     }
 
 

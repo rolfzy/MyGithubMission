@@ -4,18 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="#FAFAFA"
     tools:context="ui.MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/App_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Design.AppBarLayout">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/menu_bar"
+            android:background="@color/white"
+            app:titleTextColor="@color/black"
+            app:title="@string/app_name" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <com.google.android.material.search.SearchBar
         android:id="@+id/search_bar"
         android:layout_width="0dp"
+        android:background="#9290C3"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:hint="@string/searchbar_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/App_bar" />
 
     <com.google.android.material.search.SearchView
         android:id="@+id/search_view"
@@ -29,6 +48,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUser"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:overScrollMode="never"
+        android:scrollbarSize="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_bar" />
+
     <ProgressBar
         android:id="@+id/progress_Bar"
         android:layout_width="wrap_content"
@@ -40,17 +73,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUser"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:overScrollMode="never"
-        android:scrollbarSize="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

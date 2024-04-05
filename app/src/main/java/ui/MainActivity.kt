@@ -1,30 +1,22 @@
 package ui
 
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.data.response.GithubResponse
+import android.view.Menu
+import android.view.MenuItem
+
 import com.data.response.ItemsItem
 import com.example.mygithubmission.databinding.ActivityMainBinding
-import android.util.Log
-import android.view.KeyEvent
+
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.viewModels
+
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import data.retrofit.ApiConfig
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
 
-import androidx.lifecycle.viewmodel.compose.viewModel
-import kotlin.math.log
+import androidx.lifecycle.ViewModelProvider
+import com.example.mygithubmission.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -73,10 +65,24 @@ class MainActivity : AppCompatActivity() {
                 }
 
         }
+        binding.topAppBar.setOnMenuItemClickListener{menuitem ->
+            when(menuitem.itemId){
+                R.id.action_favorite ->{
+                    val intent =Intent(this@MainActivity,FavoriteActivity::class.java)
+                    startActivity(intent)
+                    true
+                }else -> false
+            }
+        }
+
     }
 
+
+
+
+
     private fun setUserData(useGithub: List<ItemsItem>) {
-        adapter.submitList(useGithub)
+        adapter.setList(useGithub)
         binding.rvUser.adapter = adapter //
     }
 

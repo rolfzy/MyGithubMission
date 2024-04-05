@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mygithubmission.R
 import com.example.mygithubmission.databinding.FragmentUserFollowerBinding
 
 
@@ -49,6 +47,7 @@ class userFollowFragment : Fragment() {
         arguments?.let {
             position = it.getInt(ARG_POSITION)
             username= it.getString(ARG_USERNAME)
+
         }
         if (position == 1){
             showLoading(true)
